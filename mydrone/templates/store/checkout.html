@@ -1,0 +1,146 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% block content %}
+
+   	<!-- Header Inner -->
+		<div class="header-inner">
+			<div class="container">
+				<div class="cat-nav-head">
+					<div class="row">						
+						<div class="col-lg-12 col-12">
+							<div class="menu-area">
+								<!-- Main Menu -->
+								<nav class="navbar navbar-expand-lg">
+									<div class="navbar-collapse">	
+										<div class="nav-inner">	
+											<ul class="nav main-menu menu navbar-nav">
+													<li><a href="index.html">Home</a></li>													
+													<li><a href="#">Shop<i class="ti-angle-down"></i><span class="new">New</span></a>
+														<ul class="dropdown">
+															<li><a href="shop-grid.html">Cửa hàng</a></li>
+															<li><a href="{% url 'cart:cart_detail'%}">Giỏ hàng</a></li>
+															<li class="active"><a href="checkout.html">Thanh toán</a></li>
+														</ul>
+													</li>													
+													<li><a href="contact.html">Liên hệ</a></li>
+													<li><a href="{% url 'store:rss.html'%}">RSS</a></li>
+													<li><a href="{% url 'store:products.html'%}">Products</a></li>
+												</ul>
+										</div>
+									</div>
+								</nav>
+								<!--/ End Main Menu -->	
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/ End Header Inner -->
+	</header>
+	<!--/ End Header -->
+				
+		<!-- Start Checkout -->
+		<section class="shop checkout section">
+			<div class="container">
+				<div class="row"> 
+					<div class="col-lg-8 col-12">
+						<div class="checkout-form">
+							<h2>Thông tin khách hàng</h2>
+							<p>Vui lòng đăng ký tài khoản để việc đặt hàng nhanh chóng và dễ dàng hơn</p>
+							<!-- Form -->
+							<form class="form" method="post" action="#">
+								<div class="row">
+									<div class="col-lg-6 col-md-6 col-12">
+										<div class="form-group">
+											<label>Họ<span>*</span></label>
+											<input type="text" name="last_name" placeholder="" required="required">
+										</div>
+									</div>
+									
+									<div class="col-lg-6 col-md-6 col-12">
+										<div class="form-group">
+											<label>Tên<span>*</span></label>
+											<input type="text" name="first_name" placeholder="" required="required">
+										</div>
+									</div>
+									<div class="col-lg-6 col-md-6 col-12">
+										<div class="form-group">
+											<label>Email<span>*</span></label>
+											<input type="email" name="email" placeholder="" required="required">
+										</div>
+									</div>
+									<div class="col-lg-6 col-md-6 col-12">
+										<div class="form-group">
+											<label>Số điện thoại<span>*</span></label>
+											<input type="text ame="phone" placeholder="" required="required">
+										</div>
+									</div>
+									
+									<div class="col-12">
+										<div class="form-group">
+											<label>Địa chỉ giao hàng<span>*</span></label>
+											<input type="text" name="address" placeholder="" required="required">
+										</div>
+									</div>									
+									
+									<div class="col-12">
+										<div class="form-group create-account">
+											<input id="cbox" type="checkbox">
+											<label>Tạo tài khoản?</label>
+										</div>
+									</div>
+								</div>
+							</form>
+							<!--/ End Form -->
+						</div>
+					</div>
+					<div class="col-lg-4 col-12">
+						<div class="order-details">
+							<!-- Order Widget -->
+							<div class="single-widget">
+								<h2>THÔNG TIN GIỎ HÀNG</h2>
+								<div class="content">
+									<ul>
+										<li>Tạm tính<span>$330.00</span></li>
+										<li>(+) Giao hàng<span>0 đ</span></li>
+										<li class="last">Tổng đơn hàng<span> đ</span></li>
+									</ul>
+								</div>
+							</div>
+							<!--/ End Order Widget -->
+							<!-- Order Widget -->
+							<div class="single-widget">
+								<h2>Phương thức sẽ thanh toán</h2>
+								<div class="content">
+									<div class="checkbox">
+										<label class="checkbox-inline" for="1"><input name="updates" id="1" type="checkbox"> Check Payments</label>
+										<label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox"> Cash On Delivery</label>
+										<label class="checkbox-inline" for="3"><input name="news" id="3" type="checkbox"> PayPal</label>
+									</div>
+								</div>
+							</div>
+							<!--/ End Order Widget -->
+							<!-- Payment Method Widget -->
+							<div class="single-widget payement">
+								<div class="content">
+									<img src='{% static "store/images/payment-method.png" %}' alt="#">
+								</div>
+							</div>
+							<!--/ End Payment Method Widget -->
+							<!-- Button Widget -->
+							<div class="single-widget get-button">
+								<div class="content">
+									<div class="button">
+										<a href="#" class="btn">Đặt hàng</a>
+									</div>
+								</div>
+							</div>
+							<!--/ End Button Widget -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+{% endblock content %}
