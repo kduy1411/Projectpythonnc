@@ -1,0 +1,49 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% block content %}
+
+    <!--breadcrumbs area start-->
+    	<div class="right-bar">
+							<div class="sinlge-bar shopping">
+								{% if cart %}
+								<a href="#" class="single-icon"><i class="ti-bag"></i> <span
+										class="total-count">{{cart|length}}</span></a>
+																	
+								<!-- Shopping Item -->
+								<div class="shopping-item">
+									<div class="dropdown-cart-header">
+										<span>Số sản phẩm {{cart|length}} </span>
+										<a href="{% url 'cart:cart_detail'%}">Xem giỏ hàng</a>
+									</div>
+									<ul class="shopping-list">
+										{% for item in cart %}
+										{% with drone=item.drone %}
+										<li>	
+											<form action="{% url 'cart:cart_remove' drone.pk %}" method="POST">
+												{% csrf_token %}
+												<input type="submit" value="&#9746;">
+											</form>										
+											<a class="cart-img" href="{% url 'store:drone.html' drone.pk %}"><img src="{{drone.image.url}}" alt="{{drone.name}}"></a>
+											<h4><a href="{% url 'store:drone.html' drone.pk %}">{{drone.name}}</a></h4>
+											<p class="quantity">{{item.quantity}} x <span class="amount">{% load humanize %}{{drone.price|floatformat:0|intcomma}} đ</span></p>
+											
+										</li>	
+										{% endwith %}									
+										{% endfor %}
+									</ul>
+									<div class="bottom">
+										<div class="total">
+											<span>Total</span>
+											<span class="total-amount">{% load humanize %}{{cart.get_total_price|floatformat:0|intcomma}} đ</span>
+										</div>
+										<a href="{% url 'orders:order_create' %}" class="btn animate">Đặt hàng</a>
+									</div>
+								</div>
+								<!--/ End Shopping Item -->
+								{% endif %}
+							</div>
+						</div>
+
+    <!--header area start-->
+
+{% endblock content %}

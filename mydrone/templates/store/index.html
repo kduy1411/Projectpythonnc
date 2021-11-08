@@ -1,0 +1,496 @@
+<!doctype html>
+<html class="no-js" lang="en">
+{% extends 'store/base.html' %}
+{% block content %}
+{% load static %}
+<!--   03:20:39 GMT -->
+
+ 
+
+    <!--slider area start-->
+    <section class="slider_section d-flex align-items-center" data-bgimg= '{% static "store/img/slider/slider3.jpg" %}'>
+    
+        <div class="slider_area owl-carousel">
+        
+            <div class="single_slider d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-6 col-md-6">
+                            <div class="slider_content">
+                                <h1>Next level of Drone</h1>
+                                <h2>Insane Quality for use</h2>
+                                <p>Special offer <span> 20% off </span> this week</p>
+                                <a class="button" href="drone-details.html">Buy now</a>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-md-6">
+                            <div class="slider_content">
+                                <img src= '{% static "store/img/product/1.png" %}' alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="single_slider d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-6 col-md-6">
+                            <div class="slider_content">
+                                <h1>Best Camera Included</h1>
+                                <h2>100% Flexible</h2>
+                                <p>exclusive offer <span> 20% off </span> this week</p>
+                                <a class="button" href="drone-details.html">Shop now</a>
+                            </div>
+                        </div>                        
+                        <div class="col-xl-6 col-md-6">
+                            <div class="slider_content">
+                                <img src= '{% static "store/img/product/2.png" %}' alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single_slider d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-6 col-md-6">
+                            <div class="slider_content">
+                                <h1>With some gifts</h1>
+                                <h2>Special one for you</h2>
+                                <p>exclusive offer <span> 20% off </span> this week</p>
+                                <a class="button" href="drone-details.html">shopping now</a>
+                            </div>
+                        </div>                      
+                        <div class="col-xl-6 col-md-6">
+                            <div class="slider_content">
+                                <img src= '{% static "store/img/product/3.png"%}' alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--slider area end-->
+
+    <!--Tranding product-->
+    <section class="pt-60 pb-30 gray-bg">
+        <div class="container">
+         
+            <div class="row justify-content-center">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                    <div class="single-tranding">
+               
+    	            <div class="right-bar">
+							<div class="sinlge-bar shopping">
+								{% if cart %}
+								<a href="#" class="single-icon"><i class="ti-bag"></i> <span
+										class="total-count">{{cart|length}}</span></a>
+																	
+								<!-- Shopping Item -->
+								<div class="shopping-item">
+									<div class="dropdown-cart-header">
+										<span>Số sản phẩm {{cart|length}} </span>
+										<a href="{% url 'cart:cart_detail'%}">Xem giỏ hàng</a>
+									</div>
+									<ul class="shopping-list">
+										{% for item in cart %}
+										{% with drone=item.drone %}
+										<li>	
+											<form action="{% url 'cart:cart_remove' drone.pk %}" method="POST">
+												{% csrf_token %}
+												<input type="submit" value="&#9746;">
+											</form>										
+											<a class="cart-img" href="{% url 'store:drone.html' drone.pk %}"><img src="{{drone.image.url}}" alt="{{drone.name}}"></a>
+											<h4><a href="{% url 'store:drone.html' drone.pk %}">{{drone.name}}</a></h4>
+											<p class="quantity">{{item.quantity}} x <span class="amount">{% load humanize %}{{drone.price|floatformat:0|intcomma}} đ</span></p>
+											
+										</li>	
+										{% endwith %}									
+										{% endfor %}
+									</ul>
+									<div class="bottom">
+										<div class="total">
+											<span>Total</span>
+											<span class="total-amount">{% load humanize %}{{cart.get_total_price|floatformat:0|intcomma}} đ</span>
+										</div>
+										<a href="{% url 'orders:order_create' %}" class="btn animate">Đặt hàng</a>
+									</div>
+								</div>
+								<!--/ End Shopping Item -->
+								{% endif %}
+							</div>
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!--Tranding product-->
+
+    <!--Features area-->
+    <section class="features-area pt-60 pb-60">
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <div class="section-title">
+                        <h2>Awesome Features</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                    <div class="single-features">
+                        <img src= '{% static "store/img/icon/1.png" %}' alt="">
+                        <h3>Impressive Distance</h3>
+                        <p>consectetur adipisicing elit. Ut praesentium earum, blanditiis, voluptatem repellendus rerum voluptatibus dignissimos</p>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                    <div class="single-features">
+                        <img src= '{% static "store/img/icon/2.png" %}' alt="">
+                        <h3>100% self safe</h3>
+                        <p>consectetur adipisicing elit. Ut praesentium earum, blanditiis, voluptatem repellendus rerum voluptatibus dignissimos</p>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                    <div class="single-features">
+                        <img src="store/img/icon/3.png" alt="">
+                        <h3>Awesome Support</h3>
+                        <p>consectetur adipisicing elit. Ut praesentium earum, blanditiis, voluptatem repellendus rerum voluptatibus dignissimos</p>
+                    </div>
+                </div>
+                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
+                    <a href="#"><img src= '{% static "store/img/product/2.png" %}' alt=""></a>
+                </div>
+            </div>
+        </div>
+    </section><!--Features area-->
+
+    <!--Features area-->
+    <section class="gray-bg pt-60 pb-60">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 order-lg-1 order-md-1 order-sm-1">
+                    <div class="pro-details-feature">
+                        <img src= '{% static "store/img/product/1.png" %}' alt="">
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 order-lg-2 order-md-2 order-sm-2">
+                    <div class="pro-details-feature">
+                        <h3>Long Lasting</h3>
+                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
+                        <ul>
+                            <li>It is a long established fact that</li>
+                            <li>Many desktop publishing</li>
+                            <li>Various versions have evolved over the years, sometimes by accident</li>
+                            <li>There are many variations of passages</li>
+                            <li>If you are going to use a</li>
+                            <li>Alteration in some form, by injected</li>
+                        </ul>
+                        <a href="#">$70 Buy now</a>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 order-lg-3 order-md-4 order-sm-4 order-4">
+                    <div class="pro-details-feature">
+                        <h3>Impressive Distance</h3>
+                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
+                        <ul>
+                            <li>It is a long established fact that</li>
+                            <li>Many desktop publishing</li>
+                            <li>Various versions have evolved over the years, sometimes by accident</li>
+                            <li>There are many variations of passages</li>
+                            <li>If you are going to use a</li>
+                            <li>Alteration in some form, by injected</li>
+                        </ul>
+                        <a href="#">$70 Buy now</a>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 order-lg-4 order-md-3 order-sm-3 order-3">
+                    <div class="pro-details-feature">
+                        <img src= '{% static "store/img/product/1.png" %}' alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!--Features area-->
+
+    
+    <!--product details start-->
+    <div class="product_details mt-60 mb-60">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="drone-details-tab">
+                        <div id="img-1" class="zoomWrapper single-zoom">
+                            <a href="#">
+                                <img id="zoom1" src='{% static "store/img/product/details-1.jpg"%}' data-zoom-image= '{% static "store/img/product/details-1.jpg"%}' alt="big-1">
+                            </a>
+                        </div>
+                        <div class="single-zoom-thumb">
+                            <ul class="s-tab-zoom owl-carousel single-product-active" id="gallery_01">
+                               
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="product_d_right">
+                        <form action="#">
+                            
+                            <h1>Meyoji Robast Drone Fusce ultricies massa</h1>
+                            <div class=" product_ratting">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    <li class="review"><a href="#"> (250 reviews) </a></li>
+                                </ul>
+                                
+                            </div>
+                            <div class="price_box">
+                                <span class="current_price">$70.00</span>
+                                <span class="old_price">$80.00</span>                                
+                            </div>
+                            <div class="product_desc">
+                                <ul>
+                                    <li>In Stock</li>
+                                    <li>Free delivery available*</li>
+                                    <li>Sale 30% Off Use Code : 'Drophut'</li>
+                                </ul>
+                                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a  for 'lorem ipsum' will</p>
+                            </div>
+                            <div class="product_timing">
+                                <div data-countdown="2021/6/28"></div>
+                            </div>
+                            <div class="product_variant color">
+                                <h3>Available Options</h3>
+                                <label>color</label>
+                                <ul>
+                                    <li class="color1"><a href="#"></a></li>
+                                    <li class="color2"><a href="#"></a></li>
+                                    <li class="color3"><a href="#"></a></li>
+                                    <li class="color4"><a href="#"></a></li>
+                                </ul>
+                            </div>
+                            <div class="product_variant quantity">
+                                <label>quantity</label>
+                                <input min="1" max="100" value="1" type="number">
+                                <button class="button" type="submit">Buy now</button>  
+                                
+                            </div>
+                            <div class="product_meta">
+                                <span>Category: <a href="#">Drone</a></span>
+                            </div>
+                            
+                        </form>
+                        <div class="priduct_social">
+                            <ul>
+                                <li><a class="facebook" href="#" title="facebook"><i class="fa fa-facebook"></i> Like</a></li>           
+                                <li><a class="twitter" href="#" title="twitter"><i class="fa fa-twitter"></i> tweet</a></li>           
+                                <li><a class="pinterest" href="#" title="pinterest"><i class="fa fa-pinterest"></i> save</a></li>           
+                                <li><a class="google-plus" href="#" title="google +"><i class="fa fa-google-plus"></i> share</a></li>        
+                                <li><a class="linkedin" href="#" title="linkedin"><i class="fa fa-linkedin"></i> linked</a></li>        
+                            </ul>      
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>
+    <!--product details end-->
+
+    
+    
+
+    
+    
+    <!--Testimonials-->
+    <section class="pb-60 pt-60 gray-bg">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-10">
+                    <div class="testimonial_are">
+                        <div class="testimonial_active owl-carousel">       
+                            <article class="single_testimonial">
+                                <figure>
+                                    <div class="testimonial_thumb">
+                                        <a href="#"><img src= '{% static "store/img/vlu.jpg" %}' alt=""></a>
+                                    </div>
+                                    <figcaption class="testimonial_content">
+                                        <p>Chào mừng đến với web bán hàng </p>
+                                        <h3><a href="#">DUY</a><span> - CEO </span></h3>
+                                    </figcaption>
+                                    
+                                </figure>
+                            </article> 
+                            <article class="single_testimonial">
+                                <figure>
+                                    <div class="testimonial_thumb">
+                                        <a href="#"><img src= '{% static "store/img/vlu.jpg"  %}' alt=""></a>
+                                    </div>
+                                    <figcaption class="testimonial_content">
+                                        <p>Hello</p>
+                                        <h3><a href="#">LONG</a><span> - CEO </span></h3>
+                                    </figcaption>
+                                    
+                                </figure>
+                            </article> 
+                            <article class="single_testimonial">
+                                <figure>
+                                    <div class="testimonial_thumb">
+                                        <a href="#"><img src= '{% static "store/img/vlu.jpg"  %}' alt=""></a>
+                                    </div>
+                                    <figcaption class="testimonial_content">
+                                        <p>187IT06779 - Nguyễn Khương Duy </p>
+                                        <p>187IT20959 - Trần Minh Long </p>
+                                        <h3><a href="#">DUY-LONG</a><span> A-Z</span></h3>
+                                    </figcaption>
+                                    
+                                </figure>
+                            </article>      
+                        </div>   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!--/Testimonials-->
+
+    <!--Blog-->
+    <section class="pt-60">
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <div class="section-title">
+                        <h2>Blog Posts</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row blog_wrapper">
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+                    <article class="single_blog mb-60">
+                        <figure>
+                            <div class="blog_thumb">
+                                <a href="rss.html"><img src= '{% static "store/img/blog/blog2.jpg" %}' alt=""></a>
+                            </div>
+                            <figcaption class="blog_content">
+                                <h3><a href="rss.html">How to start drone</a></h3>
+                                <div class="blog_meta">                                        
+                                    <span class="author">Posted by : <a href="#">Rahul</a> / </span>
+                                    <span class="post_date"><a href="#">Sep 20, 2019</a></span>
+                                </div>
+                                <div class="blog_desc">
+                                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less</p>
+                                </div>
+                                <footer class="readmore_button">
+                                    <a href="rss.html">read more</a>
+                                </footer>
+                            </figcaption>
+                        </figure>
+                    </article>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+                    <article class="single_blog blog_bidio mb-60">
+                        <figure>
+                            <div class="blog_thumb">
+                                <a href="rss.html"><img src= '{% static "store/img/blog/blog1.jpg" %}' alt=""></a>
+                            </div>
+                            <figcaption class="blog_content">
+                                <h3><a href="rss.html">See the tutorial</a></h3>
+                                <div class="blog_meta">                                        
+                                    <span class="author">Posted by : <a href="#">Rahul</a> / </span>
+                                    <span class="post_date">On : <a href="#">Aug 25, 2019</a></span>
+                                </div>
+                                <div class="blog_desc">
+                                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less</p>
+                                </div>
+                                <footer class="readmore_button">
+                                    <a href="rss.html">read more</a>
+                                </footer>
+                            </figcaption>
+                        </figure>
+                    </article>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+                    <article class="single_blog mb-60">
+                        <figure>
+                            <div class="blog_thumb">
+                                <a href="rss.html"><img src= '{% static "store/img/blog/rs.jpg" %}' alt=""></a>
+                            </div>
+                            <figcaption class="blog_content">
+                                <h3><a href="rss.html">How to start drone</a></h3>
+                                <div class="blog_meta">                                        
+                                    <span class="author">Posted by : <a href="#">Rahul</a> / </span>
+                                    <span class="post_date"><a href="#">Sep 20, 2019</a></span>
+                                </div>
+                                <div class="blog_desc">
+                                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less</p>
+                                </div>
+                                <footer class="readmore_button">
+                                    <a href="rss.html">read more</a>
+                                </footer>
+                            </figcaption>
+                        </figure>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section><!--/Blog-->
+
+    <!--shipping area start-->
+    <section class="shipping_area">
+        <div class="container">
+            <div class=" row">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                    <div class="single_shipping">
+                        <div class="shipping_icone">
+                            <img src='{% static "store/img/about/shipping1.png" %}' alt="">
+                        </div>
+                        <div class="shipping_content">
+                            <h2>Free Shipping</h2>
+                            <p>Free shipping on all US order</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                    <div class="single_shipping">
+                        <div class="shipping_icone">
+                            <img src='{% static "store/img/about/shipping2.png" %}' alt="">
+                        </div>
+                        <div class="shipping_content">
+                            <h2>Support 24/7</h2>
+                            <p>Contact us 24 hours a day</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                    <div class="single_shipping">
+                        <div class="shipping_icone">
+                            <img src= '{% static "store/img/about/shipping3.png" %}' alt="">
+                        </div>
+                        <div class="shipping_content">
+                            <h2>100% Money Back</h2>
+                            <p>You have 30 days to Return</p>
+                        </div>
+                    </div>
+                </div> 
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                    <div class="single_shipping">
+                        <div class="shipping_icone">
+                            <img src= '{% static "store/img/about/shipping4.png" %}'  alt="">
+                        </div>
+                        <div class="shipping_content">
+                            <h2>Payment Secure</h2>
+                            <p>We ensure secure payment</p>
+                        </div>
+                    </div>
+                </div>                          
+            </div>
+        </div>
+    </section>
+    <!--shipping area end-->
+
+{% endblock content %}

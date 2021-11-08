@@ -1,0 +1,1059 @@
+<!doctype html>
+<html class="no-js" lang="en">
+{% load static %}
+<!--   03:20:39 GMT -->
+<head>
+    <meta charset="uppy-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>WEB 2 NGUOI</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href= '{% static "store/img/vlu1.ico" %}'>
+    
+    <!-- CSS 
+    ========================= -->
+   
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href='{% static "store/css/plugins.css" %}'>
+    
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href='{% static "store/css/style.css" %}'>
+    <link rel="stylesheet" href='{% static "store/css/custom.css" %}'>
+<link rel="stylesheet" href='{% static "store/css/bootstrap.css" %}'>
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href='{% static "store/css/magnific-popup.min.css" %}'>
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href='{% static "store/css/font-awesome.css" %}'>
+	<!-- Fancybox -->
+	<link rel="stylesheet" href='{% static "store/css/jquery.fancybox.min.css" %}'>
+	<!-- Themify Icons -->
+	<link rel="stylesheet" href='{% static "store/css/themify-icons.css" %}'>
+	<!-- Nice Select CSS -->
+	<link rel="stylesheet" href='{% static "store/css/niceselect.css" %}'>
+	<!-- Animate CSS -->
+	<link rel="stylesheet" href='{% static "store/css/animate.css" %}'>
+	<!-- Flex Slider CSS -->
+	<link rel="stylesheet" href='{% static "store/css/flex-slider.min.css" %}'>
+	<!-- Owl Carousel -->
+	<link rel="stylesheet" href='{% static "store/css/owl-carousel.css" %}'>
+	<!-- Slicknav -->
+	<link rel="stylesheet" href='{% static "store/css/slicknav.min.css" %}'>
+
+	<!-- Eshop StyleSheet -->
+	<link rel="stylesheet" href='{% static "store/css/reset.css" %}'>
+	<link rel="stylesheet" href='{% static "store/style.css" %}'>
+	<link rel="stylesheet" href='{% static "store/css/responsive.css" %}'>
+
+
+</head>
+
+<body>
+    	
+    <!--header area start-->
+    <!--Offcanvas menu area start-->
+    <div class="off_canvars_overlay">
+            
+    </div>
+    <div class="Offcanvas_menu">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="canvas_open">
+                        <a href="javascript:void(0)"><i class="ion-navicon"></i></a>
+                        
+                    </div>
+                    <div class="Offcanvas_menu_wrapper">
+                        <div class="canvas_close">
+                              <a href="javascript:void(0)"><i class="ion-android-close"></i></a>
+                            
+                        </div>
+                        <div class="support_info">
+                            <p>Any Enquiry: <a href="tel:">+56985475235</a></p>
+                        </div>
+                        <div class="top_right text-right">
+                            <ul>
+                               <div class="right-content">
+							<ul class="list-main">
+								{% if username %}
+								Hello {{username}}
+								<li><i class="ti-power-off"></i><a href="{% url 'store:logout.html'%}">Logout</a></li>
+								{% else %}
+								<li><i class="ti-user"></i> <a href="{% url 'store:register.html'%}">Sign in</a></li>
+								<li><i class="ti-power-off"></i><a href="{% url 'store:login.html'%}">Login</a></li>
+								{% endif %}
+							</ul>
+						        </div>
+                            </ul>
+                            
+                        </div> 
+                 
+                        
+                        <div class="middel_right_info">
+                            <div class="header_wishlist">
+                                <a href=""><img src='{% static "store/img/user.png" %}' alt=""></a>
+                            </div>
+                            <div class="right-bar">
+							<div class="sinlge-bar shopping">
+								{% if cart %}
+								<a href="#" class="single-icon"><i class="ti-bag"></i> <span
+										class="total-count">{{cart|length}}</span></a>
+																	
+								<!-- Shopping Item -->
+								<div class="shopping-item">
+									<div class="dropdown-cart-header">
+										<span>Số sản phẩm {{cart|length}} </span>
+										<a href="{% url 'cart:cart_detail'%}">Xem giỏ hàng</a>
+									</div>
+									<ul class="shopping-list">
+										{% for item in cart %}
+										{% with drone=item.drone %}
+										<li>	
+											<form action="{% url 'cart:cart_remove' drone.pk %}" method="POST">
+												{% csrf_token %}
+												<input type="submit" value="&#9746;">
+											</form>										
+											<a class="cart-img" href="{% url 'store:drone.html' drone.pk %}"><img src="{{drone.image.url}}" alt="{{drone.name}}"></a>
+											<h4><a href="{% url 'store:drone.html' drone.pk %}">{{drone.name}}</a></h4>
+											<p class="quantity">{{item.quantity}} x <span class="amount">{% load humanize %}{{product.price|floatformat:0|intcomma}} đ</span></p>
+											
+										</li>	
+										{% endwith %}									
+										{% endfor %}
+									</ul>
+									<div class="bottom">
+										<div class="total">
+											<span>Total</span>
+											<span class="total-amount">{% load humanize %}{{cart.get_total_price|floatformat:0|intcomma}} đ</span>
+										</div>
+										<a href="{% url 'orders:order_create' %}" class="btn animate">Đặt hàng</a>
+									</div>
+								</div>
+								<!--/ End Shopping Item -->
+								{% endif %}
+							</div>
+						</div>
+                            <div class="mini_cart_wrapper">
+                                
+                                <span class="cart_quantity">2</span>
+                                <!--mini cart-->
+                                 <div class="mini_cart">
+                                    <div class="cart_item">
+                                       <div class="cart_img">
+                                           <a href="#"><img src= '{% static "store/img/s-product/product.jpg" %}' alt=""></a>
+                                       </div>
+                                        <div class="cart_info">
+                                            <a href="#">Sit voluptatem rhoncus sem lectus</a>
+                                            <p>Qty: 1 X <span> $60.00 </span></p>    
+                                        </div>
+                                        <div class="cart_remove">
+                                            <a href="#"><i class="ion-android-close"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="cart_item">
+                                       <div class="cart_img">
+                                           <a href="#"><img src= '{% static "store/img/s-product/product2.jpg" %}' alt=""></a>
+                                       </div>
+                                        <div class="cart_info">
+                                            <a href="#">Natus erro at congue massa commodo</a>
+                                            <p>Qty: 1 X <span> $60.00 </span></p>   
+                                        </div>
+                                        <div class="cart_remove">
+                                            <a href="#"><i class="ion-android-close"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="mini_cart_table">
+                                        <div class="cart_total">
+                                            <span>Sub total:</span>
+                                            <span class="price">$138.00</span>
+                                        </div>
+                                        <div class="cart_total mt-10">
+                                            <span>total:</span>
+                                            <span class="price">$138.00</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="mini_cart_footer">
+                                       <div class="cart_button">
+                                            <a href="{% url 'cart:cart_detail'  %}">View cart</a>
+                                        </div>
+                                        
+
+                                    </div>
+
+                                </div>
+                                <!--mini cart end-->
+                            </div>
+                        
+                        </div>
+                        <img>
+<a href='{% static "store/img/vlu.jpg" %}'>
+</img>
+                        <div id="menu" class="text-left ">
+                            <ul class="offcanvas_main_menu">
+                                <li class="menu-item-has-children active">
+                                    <a href="#">Home</a>
+                                </li>
+                                
+                                      
+                                 
+                                   <li class="menu-item-has-children">
+                                    <a href="{% url 'store:shop.html' 0 %} ">product</a>
+                                    <ul class="sub-menu">
+                                        
+										
+										<li><a href="login.html">login</a></li>
+										<li><a href="register.html">register</a></li>
+										<li><a href="forget-password.html">Forget Password</a></li>
+										<li><a href="{% url 'cart:cart_detail'  %}">cart</a></li>
+										
+										<li><a href="checkout.html">checkout</a></li>
+                                    </ul>
+                                </li>
+                                     
+                                <li class="menu-item-has-children">
+
+                                    <a href="#">pages </a>
+                                    <ul class="sub-menu">
+                                        
+										
+										<li><a href="login.html">login</a></li>
+										<li><a href="register.html">register</a></li>
+										<li><a href="forget-password.html">Forget Password</a></li>
+										<li><a href="{% url 'cart:cart_detail'  %}">cart</a></li>
+										
+										<li><a href="checkout.html">checkout</a></li>
+                                    </ul>
+                                </li>
+                                <li class="menu-item-has-children">
+                                    
+                                    <ul class="sub-menu">
+                                        
+                                        
+                                        
+                                    </ul>
+                                </li>
+                                <li class="menu-item-has-children">
+                                    <a href="login.html">my account</a>
+                                </li>
+                                <li class="menu-item-has-children">
+                                    <a href="drones.html">Products</a> 
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="Offcanvas_footer">
+                            <span><a href="#"><i class="fa fa-envelope-o"></i> info@drophunt.com</a></span>
+                            <ul>
+                                <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li class="pinterest"><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
+                                <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Offcanvas menu area end-->
+    
+    <header>
+        <div class="main_header">
+            <!--header top start-->
+            <div class="header_top">
+                <div class="container">  
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="support_info">
+                                <p>CONTACT : <a href="https://www.vanlanguni.edu.vn/" target='_blank'>https://www.vanlanguni.edu.vn/</a></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="top_right text-right">
+                                <ul>
+                                   
+						
+								{% if username %}
+								Hello {{username}}
+								<li><i class="ti-power-off"></i><a href="{% url 'store:logout.html'%}">Logout</a></li>
+								{% else %}
+								<li><i class="ti-user"></i> <a href="{% url 'store:register.html'%}">Sign in</a></li>
+								<li><i class="ti-power-off"></i><a href="{% url 'store:login.html'%}">Login</a></li>
+								{% endif %}
+					
+                                    
+                                   <li><a href={% url 'store:checkout.html' %}>Checkout</a></li> 
+                                </ul>
+                            </div>   
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--header top start-->
+            <!--header middel start-->
+            <div class="header_middle">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-3 col-md-6">
+                            <div class="logo">
+                                <a href={% url "store:index.html" %}><img src= '{% static "store/img/vlu.jpg" %}' alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-6">
+                            <div class="middel_right">
+                              
+                                <div class="middel_right_info">
+                                   
+                                    <div class="mini_cart_wrapper">
+                                      
+                                        <!--mini cart-->
+                                         <div class="mini_cart">
+                                            <div class="cart_item">
+                                               <div class="cart_img">
+                                                   <a href="#"><img src= '{% static "store/img/s-product/product.jpg" %}' alt=""></a>
+                                               </div>
+                                                <div class="cart_info">
+                                                    <a href="#">Sit voluptatem rhoncus sem lectus</a>
+                                                    <p>Qty: 1 X <span> $60.00 </span></p>    
+                                                </div>
+                                                <div class="cart_remove">
+                                                    <a href="#"><i class="ion-android-close"></i></a>
+                                                </div>
+                                            </div>
+                                            <div class="cart_item">
+                                               <div class="cart_img">
+                                                   <a href="#"><img src= '{% static "store/img/s-product/product2.jpg" %}' alt=""></a>
+                                               </div>
+                                                <div class="cart_info">
+                                                    <a href="#">Natus erro at congue massa commodo</a>
+                                                    <p>Qty: 1 X <span> $60.00 </span></p>   
+                                                </div>
+                                                <div class="cart_remove">
+                                                    <a href="#"><i class="ion-android-close"></i></a>
+                                                </div>
+                                            </div>
+                                            <div class="mini_cart_table">
+                                                <div class="cart_total">
+                                                    <span>Sub total:</span>
+                                                    <span class="price">$138.00</span>
+                                                </div>
+                                                <div class="cart_total mt-10">
+                                                    <span>total:</span>
+                                                    <span class="price">$138.00</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="mini_cart_footer">
+                                               <div class="cart_button">
+                                                    <a href="{% url 'cart:cart_detail'  %}">View cart</a>
+                                                </div>
+                                                <div class="cart_button">
+                                                    <a href="checkout.html">Checkout</a>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <!--mini cart end-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--header middel end-->
+            <!--header bottom satrt-->
+            <div class="main_menu_area">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="main_menu menu_position"> 
+                                <nav>  
+                                    <ul>
+                                        <li><a href={% url "store:index.html" %}>home</a></li>
+                                       
+                                          <li><a href="{% url 'store:shop.html' 0 %}">Product</a>
+                                           
+                                            
+                                        </li>
+                                        <li><a class="active" href="#">pages <i class="fa fa-angle-down"></i></a>
+                                            <ul class="sub_menu pages">
+                                               
+                                              
+                                              
+                                                
+                                                <li><a href="{% url 'cart:cart_detail'  %}">cart</a></li>
+                                              
+                                            </ul>
+                                        </li>
+                                        
+                                            <ul class="sub_menu pages">
+                                            
+                                        </li>
+                                              
+                                            </ul>
+                                        </li>
+                                       
+                                          <li><a href="drones.html">Products</a></li>
+                                    </ul>  
+                                </nav> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--header bottom end-->
+        </div> 
+    </header>
+    <!--header area end-->
+{% block content %}
+  
+
+
+    <!--slider area start-->
+    <section class="slider_section d-flex align-items-center" data-bgimg= '{% static "store/img/slider/slider3.jpg" %}'>
+        <div class="slider_area owl-carousel">
+            <div class="single_slider d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-6 col-md-6">
+                            <div class="slider_content">
+                                <h1>Next level of Drone</h1>
+                                <h2>Insane Quality for use</h2>
+                                <p>Special offer <span> 20% off </span> this week</p>
+                                <a class="button" href="drone-details.html">Buy now</a>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-md-6">
+                            <div class="slider_content">
+                                <img src= '{% static "store/img/product/1.png" %}' alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="single_slider d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-6 col-md-6">
+                            <div class="slider_content">
+                                <h1>Best Camera Included</h1>
+                                <h2>100% Flexible</h2>
+                                <p>exclusive offer <span> 20% off </span> this week</p>
+                                <a class="button" href="drone-details.html">Shop now</a>
+                            </div>
+                        </div>                        
+                        <div class="col-xl-6 col-md-6">
+                            <div class="slider_content">
+                                <img src= '{% static "store/img/product/2.png" %}' alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single_slider d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-6 col-md-6">
+                            <div class="slider_content">
+                                <h1>With some gifts</h1>
+                                <h2>Special one for you</h2>
+                                <p>exclusive offer <span> 20% off </span> this week</p>
+                                <a class="button" href="drone-details.html">shopping now</a>
+                            </div>
+                        </div>                      
+                        <div class="col-xl-6 col-md-6">
+                            <div class="slider_content">
+                                <img src= '{% static "store/img/product/3.png"%}' alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--slider area end-->
+
+    <!--Tranding product-->
+    <section class="pt-60 pb-30 gray-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <div class="section-title">
+                        <h2>Tranding Products</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                    <div class="single-tranding">
+                        <a href="drone-details.html">
+                            <div class="tranding-pro-img">
+                                <img src= '{% static "store/img/product/tranding-1.jpg" %}' alt="">
+                            </div>
+                            <div class="tranding-pro-title">
+                                <h3>Meyoji Robast Drone</h3>
+                                <h4>Drone</h4>
+                            </div>
+                            <div class="tranding-pro-price">
+                                <div class="price_box">
+                                    <span class="current_price">$70.00</span>
+                                    <span class="old_price">$80.00</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                    <div class="single-tranding">
+                        <a href="drone-details.html">
+                            <div class="tranding-pro-img">
+                                <img src= '{% static "store/img/product/tranding-2.jpg" %}' alt="">
+                            </div>
+                            <div class="tranding-pro-title">
+                                <h3>Ut praesentium earum</h3>
+                                <h4>Mevrik</h4>
+                            </div>
+                            <div class="tranding-pro-price">
+                                <div class="price_box">
+                                    <span class="current_price">$70.00</span>
+                                    <span class="old_price">$80.00</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                    <div class="single-tranding">
+                        <a href="drone-details.html">
+                            <div class="tranding-pro-img">
+                                <img src= '{% static "store/img/product/tranding-3.jpg" %}' alt="">
+                            </div>
+                            <div class="tranding-pro-title">
+                                <h3>Consectetur adipisicing</h3>
+                                <h4>Flyer</h4>
+                            </div>
+                            <div class="tranding-pro-price">
+                                <div class="price_box">
+                                    <span class="current_price">$70.00</span>
+                                    <span class="old_price">$80.00</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!--Tranding product-->
+
+    <!--Features area-->
+    <section class="features-area pt-60 pb-60">
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <div class="section-title">
+                        <h2>Awesome Features</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                    <div class="single-features">
+                        <img src= '{% static "store/img/icon/1.png" %}' alt="">
+                        <h3>Impressive Distance</h3>
+                        <p>consectetur adipisicing elit. Ut praesentium earum, blanditiis, voluptatem repellendus rerum voluptatibus dignissimos</p>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                    <div class="single-features">
+                        <img src= '{% static "store/img/icon/2.png" %}' alt="">
+                        <h3>100% self safe</h3>
+                        <p>consectetur adipisicing elit. Ut praesentium earum, blanditiis, voluptatem repellendus rerum voluptatibus dignissimos</p>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                    <div class="single-features">
+                        <img src="store/img/icon/3.png" alt="">
+                        <h3>Awesome Support</h3>
+                        <p>consectetur adipisicing elit. Ut praesentium earum, blanditiis, voluptatem repellendus rerum voluptatibus dignissimos</p>
+                    </div>
+                </div>
+                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
+                    <a href="#"><img src= '{% static "store/img/product/2.png" %}' alt=""></a>
+                </div>
+            </div>
+        </div>
+    </section><!--Features area-->
+    
+
+    <!--Features area-->
+    <section class="gray-bg pt-60 pb-60">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 order-lg-1 order-md-1 order-sm-1">
+                    <div class="pro-details-feature">
+                        <img src= '{% static "store/img/product/1.png" %}' alt="">
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 order-lg-2 order-md-2 order-sm-2">
+                    <div class="pro-details-feature">
+                        <h3>Long Lasting</h3>
+                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
+                        <ul>
+                            <li>It is a long established fact that</li>
+                            <li>Many desktop publishing</li>
+                            <li>Various versions have evolved over the years, sometimes by accident</li>
+                            <li>There are many variations of passages</li>
+                            <li>If you are going to use a</li>
+                            <li>Alteration in some form, by injected</li>
+                        </ul>
+                        <a href="#">$70 Buy now</a>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 order-lg-3 order-md-4 order-sm-4 order-4">
+                    <div class="pro-details-feature">
+                        <h3>Impressive Distance</h3>
+                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
+                        <ul>
+                            <li>It is a long established fact that</li>
+                            <li>Many desktop publishing</li>
+                            <li>Various versions have evolved over the years, sometimes by accident</li>
+                            <li>There are many variations of passages</li>
+                            <li>If you are going to use a</li>
+                            <li>Alteration in some form, by injected</li>
+                        </ul>
+                        <a href="#">$70 Buy now</a>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 order-lg-4 order-md-3 order-sm-3 order-3">
+                    <div class="pro-details-feature">
+                        <img src= '{% static "store/img/product/1.png" %}' alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!--Features area-->
+
+    
+    <!--product details start-->
+    <div class="product_details mt-60 mb-60">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="drone-details-tab">
+                        <div id="img-1" class="zoomWrapper single-zoom">
+                            <a href="#">
+                                <img id="zoom1" src='{% static "store/img/product/details-1.jpg"%}' data-zoom-image= '{% static "store/img/product/details-1.jpg"%}' alt="big-1">
+                            </a>
+                        </div>
+                        <div class="single-zoom-thumb">
+                            <ul class="s-tab-zoom owl-carousel single-product-active" id="gallery_01">
+                               
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="product_d_right">
+                        <form action="#">
+                            
+                            <h1>Meyoji Robast Drone Fusce ultricies massa</h1>
+                            <div class=" product_ratting">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    <li class="review"><a href="#"> (250 reviews) </a></li>
+                                </ul>
+                                
+                            </div>
+                            <div class="price_box">
+                                <span class="current_price">$70.00</span>
+                                <span class="old_price">$80.00</span>                                
+                            </div>
+                            <div class="product_desc">
+                                <ul>
+                                    <li>In Stock</li>
+                                    <li>Free delivery available*</li>
+                                    <li>Sale 30% Off Use Code : 'Drophut'</li>
+                                </ul>
+                                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a  for 'lorem ipsum' will</p>
+                            </div>
+                            <div class="product_timing">
+                                <div data-countdown="2021/6/28"></div>
+                            </div>
+                            <div class="product_variant color">
+                                <h3>Available Options</h3>
+                                <label>color</label>
+                                <ul>
+                                    <li class="color1"><a href="#"></a></li>
+                                    <li class="color2"><a href="#"></a></li>
+                                    <li class="color3"><a href="#"></a></li>
+                                    <li class="color4"><a href="#"></a></li>
+                                </ul>
+                            </div>
+                            <div class="product_variant quantity">
+                                <label>quantity</label>
+                                <input min="1" max="100" value="1" type="number">
+                                <button class="button" type="submit">Buy now</button>  
+                                
+                            </div>
+                            <div class="product_meta">
+                                <span>Category: <a href="#">Drone</a></span>
+                            </div>
+                            
+                        </form>
+                        <div class="priduct_social">
+                            <ul>
+                                <li><a class="facebook" href="#" title="facebook"><i class="fa fa-facebook"></i> Like</a></li>           
+                                <li><a class="twitter" href="#" title="twitter"><i class="fa fa-twitter"></i> tweet</a></li>           
+                                <li><a class="pinterest" href="#" title="pinterest"><i class="fa fa-pinterest"></i> save</a></li>           
+                                <li><a class="google-plus" href="#" title="google +"><i class="fa fa-google-plus"></i> share</a></li>        
+                                <li><a class="linkedin" href="#" title="linkedin"><i class="fa fa-linkedin"></i> linked</a></li>        
+                            </ul>      
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>
+    <!--product details end-->
+
+    
+    
+
+    
+    
+    <!--Testimonials-->
+    <section class="pb-60 pt-60 gray-bg">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-10">
+                    <div class="testimonial_are">
+                        <div class="testimonial_active owl-carousel">       
+                            <article class="single_testimonial">
+                                <figure>
+                                    <div class="testimonial_thumb">
+                                        <a href="#"><img src= '{% static "store/img/vlu.jpg" %}' alt=""></a>
+                                    </div>
+                                    <figcaption class="testimonial_content">
+                                        <p>Chào mừng đến với web bán hàng </p>
+                                        <h3><a href="#">Duy</a><span> CEO </span></h3>
+                                    </figcaption>
+                                    
+                                </figure>
+                            </article> 
+                            <article class="single_testimonial">
+                                <figure>
+                                    <div class="testimonial_thumb">
+                                        <a href="#"><img src= '{% static "store/img/vlu.jpg" %}' alt=""></a>
+                                    </div>
+                                    <figcaption class="testimonial_content">
+                                        <p>187IT06779- 187IT20959</p>
+                                        <h3><a href="#">LONG</a><span> - CEO</span></h3>
+                                    </figcaption>
+                                    
+                                </figure>
+                            </article> 
+                            <article class="single_testimonial">
+                                <figure>
+                                    <div class="testimonial_thumb">
+                                        <a href="#"><img src= '{% static "store/img/vlu.jpg" %}' alt=""></a>
+                                    </div>
+                                    <figcaption class="testimonial_content">
+                                        <p>Hello</p>
+                                        <h3><a href="#">DUY-LONG</a><span> - CEO</span></h3>
+                                    </figcaption>
+                                    
+                                </figure>
+                            </article>      
+                        </div>   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!--/Testimonials-->
+
+    <!--Blog-->
+    <section class="pt-60">
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <div class="section-title">
+                        <h2>Blog Posts</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row blog_wrapper">
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+                    <article class="single_blog mb-60">
+                        <figure>
+                            <div class="blog_thumb">
+                                
+                            </div>
+                            <figcaption class="blog_content">
+                                
+                                <div class="blog_meta">                                        
+                                    <span class="author">Posted by : <a href="#">Rahul</a> / </span>
+                                    <span class="post_date"><a href="#">Sep 20, 2019</a></span>
+                                </div>
+                                <div class="blog_desc">
+                                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less</p>
+                                </div>
+                                <footer class="readmore_button">
+                                    
+                                </footer>
+                            </figcaption>
+                        </figure>
+                    </article>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+                    <article class="single_blog blog_bidio mb-60">
+                        <figure>
+                            <div class="blog_thumb">
+                                
+                            </div>
+                            <figcaption class="blog_content">
+                                
+                                <div class="blog_meta">                                        
+                                    <span class="author">Posted by : <a href="#">Rahul</a> / </span>
+                                    <span class="post_date">On : <a href="#">Aug 25, 2019</a></span>
+                                </div>
+                                <div class="blog_desc">
+                                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less</p>
+                                </div>
+                                <footer class="readmore_button">
+                                    
+                                </footer>
+                            </figcaption>
+                        </figure>
+                    </article>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+                    <article class="single_blog mb-60">
+                        <figure>
+                            <div class="blog_thumb">
+                                
+                            </div>
+                            <figcaption class="blog_content">
+                                
+                                <div class="blog_meta">                                        
+                                    <span class="author">Posted by : <a href="#">Rahul</a> / </span>
+                                    <span class="post_date"><a href="#">Sep 20, 2019</a></span>
+                                </div>
+                                <div class="blog_desc">
+                                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less</p>
+                                </div>
+                                <footer class="readmore_button">
+                                    
+                                </footer>
+                            </figcaption>
+                        </figure>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section><!--/Blog-->
+
+    <!--shipping area start-->
+    <section class="shipping_area">
+        <div class="container">
+            <div class=" row">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                    <div class="single_shipping">
+                        <div class="shipping_icone">
+                            <img src='{% static "store/img/about/shipping1.png" %}' alt="">
+                        </div>
+                        <div class="shipping_content">
+                            <h2>Free Shipping</h2>
+                            <p>Free shipping on all US order</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                    <div class="single_shipping">
+                        <div class="shipping_icone">
+                            <img src='{% static "store/img/about/shipping2.png" %}' alt="">
+                        </div>
+                        <div class="shipping_content">
+                            <h2>Support 24/7</h2>
+                            <p>Contact us 24 hours a day</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                    <div class="single_shipping">
+                        <div class="shipping_icone">
+                            <img src= '{% static "store/img/about/shipping3.png" %}' alt="">
+                        </div>
+                        <div class="shipping_content">
+                            <h2>100% Money Back</h2>
+                            <p>You have 30 days to Return</p>
+                        </div>
+                    </div>
+                </div> 
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                    <div class="single_shipping">
+                        <div class="shipping_icone">
+                            <img src= '{% static "store/img/about/shipping4.png" %}'  alt="">
+                        </div>
+                        <div class="shipping_content">
+                            <h2>Payment Secure</h2>
+                            <p>We ensure secure payment</p>
+                        </div>
+                    </div>
+                </div>                          
+            </div>
+        </div>
+    </section>
+    <!--shipping area end-->
+	
+	{% endblock content %}
+    <!--footer area start-->
+    <footer class="footer_widgets">
+        <div class="footer_top">
+            <div class="container">
+                <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="widgets_container contact_us">
+                        <div class="footer_logo">
+                            <a href="#"><img src=   '{% static "store/img/logo/logo-vlu.jpg"  %}' alt=""></a>
+                        </div>
+                        <div class="footer_contact">
+                            <p>187IT06779 - Nguyễn Khương Duy </p>
+                            <p>187IT20959 - Trần Minh Long </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6">
+                    <div class="widgets_container widget_menu">
+                        <h3>Information</h3>
+                        <div class="footer_menu">
+                            <ul>
+                                
+                                
+                                <li><a href="contact.html">Privacy Policy</a></li>
+                            
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6">
+                    <div class="widgets_container widget_menu">
+                        <h3>My Account</h3>
+                        <div class="footer_menu">
+                            <ul>
+                                <li><a href="#">My Account</a></li>
+                                <li><a href="#">Order History</a></li>
+                            
+                                <li><a href="#">Newsletter</a></li>
+                                
+                               
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="widgets_container newsletter">
+                        <h3>Follow Us</h3>
+                        <div class="footer_social_link">
+                            <ul>
+                                <li><a class="facebook" href="#" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                                <li><a class="twitter" href="#" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                <li><a class="instagram" href="#" title="instagram"><i class="fa fa-instagram"></i></a></li>
+                                <li><a class="linkedin" href="#" title="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                                
+                            </ul>
+                        </div>
+                        <div class="subscribe_form">
+                            <h3>Join Our Newsletter Now</h3>
+                            <form id="mc-form" class="mc-form footer-newsletter" >
+                                <input id="mc-email" type="email" autocomplete="off" placeholder="Your email address..." />
+                                <button id="mc-submit">Subscribe!</button>
+                            </form>
+                            <!-- mailchimp-alerts Start -->
+                            <div class="mailchimp-alerts text-centre">
+                                <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
+                                <div class="mailchimp-success"></div><!-- mailchimp-success end -->
+                                <div class="mailchimp-error"></div><!-- mailchimp-error end -->
+                            </div><!-- mailchimp-alerts end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="footer_bottom">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="copyright_area">
+                            <p> <a href="templateshub.net">Templates Hub</a></p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="footer_payment text-right">
+                            <a href="#"><img src= '{% static "store/img/icon/payment.png" %}' alt=""></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>   
+    </footer>
+    <!--footer area end-->
+<!-- JS
+============================================ -->
+
+
+
+<!-- Plugins JS -->
+<script src= '{% static "store/js/plugins.js" %}'></script>
+
+<!-- Main JS -->
+<script src='{% static "store/js/main.js" %}'></script>
+
+		<!-- Jquery -->
+		<script src='{% static "store/js/jquery.min.js" %}'></script>
+		<script src='{% static "store/js/jquery-migrate-3.0.0.js" %}'></script>
+		<script src='{% static "store/js/jquery-ui.min.js" %}'></script>
+		<!-- Popper JS -->
+		<script src='{% static "store/js/popper.min.js" %}'></script>
+		<!-- Bootstrap JS -->
+		<script src='{% static "store/js/bootstrap.min.js" %}'></script>
+		<!-- Color JS -->
+		<script src='{% static "store/js/colors.js" %}'></script>
+		<!-- Slicknav JS -->
+		<script src='{% static "store/js/slicknav.min.js" %}'></script>
+		<!-- Owl Carousel JS -->
+		<script src='{% static "store/js/owl-carousel.js" %}'></script>
+		<!-- Magnific Popup JS -->
+		<script src='{% static "store/js/magnific-popup.js" %}'></script>
+		<!-- Waypoints JS -->
+		<script src='{% static "store/js/waypoints.min.js" %}'></script>
+		<!-- Countdown JS -->
+		<script src='{% static "store/js/finalcountdown.min.js" %}'></script>
+		<!-- Nice Select JS -->
+		<script src='{% static "store/js/nicesellect.js" %}'></script>
+		<!-- Flex Slider JS -->
+		<script src='{% static "store/js/flex-slider.js" %}'></script>
+		<!-- ScrollUp JS -->
+		<script src='{% static "store/js/scrollup.js" %}'></script>
+		<!-- Onepage Nav JS -->
+		<script src='{% static "store/js/onepage-nav.min.js" %}'></script>
+		<!-- Easing JS -->
+		<script src='{% static "store/js/easing.js" %}'></script>
+		<!-- Active JS -->
+		<script src='{% static "store/js/active.js" %}'></script>
+
+</body>
+
+<!--   03:22:07 GMT -->
+</html>
